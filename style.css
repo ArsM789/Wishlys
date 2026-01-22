@@ -1,0 +1,554 @@
+/* ========== Переменные и шрифты ========== */
+:root{
+  /* Цвета Wishlys */
+  --bg-dark: #1f1f1f;
+  --accent: #97C2EC;
+  --surface: #EFEDE3; /* светлый элемент */
+  --muted: #bdb7ad;
+  --text: #efefef;
+  --panel-contrast: rgba(255,255,255,0.04);
+
+  --radius-lg: 16px;
+  --radius-md: 12px;
+  --container-max: 1200px;
+
+  --shadow-1: 0 8px 30px rgba(0,0,0,0.6);
+  --glass: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+}
+
+/* Подключение локальных шрифтов (файлы в assets/) */
+@font-face {
+  font-family: 'WishlysDisplay';
+  src: url('assets/Rubik-VariableFont_wght.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'WishlysLogo';
+  src: url('assets/Pacifico-Regular.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'WishlysSans';
+  src: url('assets/HelveticaNeue-Medium.otf') format('opentype');
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Базовые стили */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background: var(--bg-dark);
+  color:var(--text);
+  font-family: 'WishlysSans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.45;
+}
+
+/* Контейнер */
+.container{
+  max-width:var(--container-max);
+  margin:0 auto;
+  padding:0 20px;
+}
+
+/* Header */
+.site-header{
+  position:sticky;
+  top:0;
+  z-index:50;
+  background: linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.15));
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  backdrop-filter: blur(6px);
+}
+.header-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding: 18px 0;
+
+
+  @media (max-width: 1000px) {
+    padding: 12px 15px
+  }
+
+}
+
+/* Brand */
+/* --- Новый брендовый блок --- */
+.brand-new {
+  display:flex;
+  flex-direction:column;
+  text-decoration:none;
+  color:var(--text);
+  gap:4px;
+  transition:transform .25s cubic-bezier(.2,.9,.3,1);
+}
+.brand-new:hover { transform:translateY(-2px); }
+
+.brand-wordmark {
+  display:flex;
+  align-items: flex-end;
+  font-family:'WishlysDisplay','WishlysSans',sans-serif;
+  font-weight:700;
+  font-size:24px;
+  position:relative;
+}
+
+.logo-letter {
+  width:30px;
+  height:30px;
+  filter:drop-shadow(0 0 10px rgba(151,194,236,0.5));
+  transition:transform .3s ease, filter .3s ease;
+}
+.brand-new:hover .logo-letter {
+  transform:scale(1.08) rotate(-2deg);
+  filter:drop-shadow(0 0 16px rgba(151,194,236,0.8));
+}
+
+.word-rest {
+  color:var(--surface);
+  background:linear-gradient(90deg,var(--accent) 0%, #c8e0ff 80%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  font-size:26px;
+  line-height:1;
+  position: relative;
+  top: 3px;
+}
+
+.tagline {
+  font-size:12px;
+  color:var(--muted);
+  letter-spacing:0.4px;
+}
+.tag-accent {
+  color:var(--accent);
+  font-family:'WishlysDisplay';
+}
+
+/* --- Улучшенный Header фон и глубина --- */
+.site-header {
+  background: radial-gradient(circle at top left, rgba(151,194,236,0.06) 0%, rgba(0,0,0,0.8) 60%);
+  border-bottom:1px solid rgba(255,255,255,0.05);
+  backdrop-filter:blur(10px);
+  box-shadow:0 4px 40px rgba(151,194,236,0.08);
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+
+.brand-name{
+  font-family:'WishlysDisplay', 'WishlysSans', sans-serif;
+  font-size:18px;
+  font-weight:700;
+  letter-spacing:0.02em;
+}
+.brand-tagline{
+  font-size:12px;color:var(--muted);margin-top:2px;
+}
+.accent-phrase{color:var(--accent);font-family:'WishlysDisplay', 'WishlysSans', sans-serif;}
+
+/* Navigation */
+.top-nav{display:flex;gap:12px;align-items:center; scroll-behavior: smooth; scrollbar-width: auto;}
+.nav-link{
+  color:var(--muted);
+  text-decoration:none;
+  font-weight:600;
+  padding:8px 10px;
+  border-radius:10px;
+  transition:all .14s ease;
+}
+.nav-link:hover{color:var(--text);background:rgba(255,255,255,0.02)}
+.nav-link.active{color:var(--text);background:linear-gradient(90deg, rgba(151,194,236,0.08), rgba(151,194,236,0.03))}
+
+/* Buttons */
+.btn{
+  border:0;
+  padding:8px 14px;
+  border-radius:12px;
+  cursor:pointer;
+  font-weight:700;
+}
+.btn:hover{transform:translateY(-2px);transition:transform .14s}
+.btn-primary{
+  background: linear-gradient(180deg, var(--accent), #7fb5e6);
+  color:var(--bg-dark);
+  padding:10px 16px;
+  border-radius:14px;
+  box-shadow: 0 10px 30px rgba(15,30,60,0.35);
+
+  @media (max-width: 1000px) {
+    padding: 8px 12px
+  }
+
+}
+.btn-ghost{
+  background:transparent;color:var(--text);
+  border:1px solid rgba(255,255,255,0.04);padding:12px 12px;border-radius:12px;
+
+  @media (max-width: 500px) {
+    display: none;
+  }
+}
+.btn-outline{
+  background:transparent;color:var(--text);border:1px solid rgba(255,255,255,0.06);padding:8px 12px;border-radius:10px;font-weight:600;
+}
+
+/* Hero */
+.hero{padding:64px 0}
+.hero-grid{
+  display:grid;
+  grid-template-columns: 1fr 420px;
+  gap:28px;
+  align-items:start;
+}
+
+/* Left column */
+.hero-title{
+  font-family:'WishlysDisplay', 'WishlysSans', sans-serif;
+  font-size:40px;
+  margin:0 0 14px;
+  line-height:1.03;
+  color:var(--text);
+}
+.hero-accent{color:var(--accent);font-family:'WishlysDisplay', sans-serif}
+.hero-logo-name{color:(--text); font-family: 'WishlysLogo', sans-serif;}
+.hero-highlight{
+  color:var(--surface);
+  background: linear-gradient(90deg, rgba(151,194,236,0.12), rgba(239,237,227,0.05));
+  padding:2px 2px;border-radius:12px;font-weight:700;
+}
+.hero-sub{color:var(--muted);margin:16px 0 18px;max-width:580px}
+.cta-row{display:flex;gap:12px;align-items:center}
+.large{padding:12px 20px;font-size:16px}
+
+/* Benefits */
+.benefits{display:flex;flex-direction:column;gap:8px;margin-top:18px;padding-left:18px;color:var(--muted)}
+.benefits strong{color:var(--surface);margin-right:6px}
+
+/* Small intro with selective accent words inside */
+.small-intro{margin-top:14px;color:var(--muted)}
+.intext-accent{color:var(--accent);font-weight:700;font-family:'WishlysDisplay', 'WishlysSans'}
+
+/* Right column — app mock */
+.hero-right{display:flex;justify-content:center}
+.app-card{
+  width:100%;
+  min-height: 200px;
+  height: 400px;
+  max-height: 400px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+  border-radius:18px;
+  padding:16px;
+  box-shadow: var(--shadow-1);
+  border: 1px solid rgba(255,255,255,0.03);
+  transition:transform .28s cubic-bezier(.2,.9,.3,1), box-shadow .28s;
+}
+.app-card:hover{box-shadow:0 18px 60px rgba(0,0,0,0.7)}
+.app-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.app-title{font-weight:700}
+.app-actions{display:flex;gap:8px}
+.icon-btn{background:transparent;border:0;color:var(--muted);padding:6px;border-radius:10px;cursor:pointer}
+.icon-btn:hover{background:rgba(255,255,255,0.02);color:var(--text)}
+
+/* Tasks */
+.task-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.task{
+  display:flex;justify-content:space-between;align-items:center;padding:10px;border-radius:12px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.02));
+  border:1px solid rgba(255,255,255,0.02);
+  transition:transform .14s, box-shadow .14s;
+}
+.task:hover{transform:translateY(-4px);box-shadow:0 10px 30px rgba(0,0,0,0.6)}
+.task .left{display:flex;gap:10px;align-items:center}
+.task input[type="checkbox"]{width:18px;height:18px;accent-color:var(--accent); border-radius: 15px;}
+.task label{font-weight:600}
+.task.muted label{color:var(--muted);font-weight:500}
+.badge{
+  background: linear-gradient(90deg, rgba(151,194,236,0.08), rgba(239,237,227,0.02));
+  padding:6px 8px;border-radius:10px;font-size:12px;color:var(--accent);font-weight:700;
+}
+.badge.light{color:var(--muted);background:rgba(255,255,255,0.02)}
+
+/* Add row */
+.add-row{
+  display:flex;
+  gap:8px;
+  margin-top:125px;
+  align-items:center; 
+  
+}
+.add-row input{
+  flex:1;padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);
+  background:transparent;color:var(--text);
+}
+
+/* Features section */
+.features{padding:56px 0;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.03))}
+.section-title{font-family:'WishlysDisplay', 'WishlysSans';font-size:26px;margin-bottom:20px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.03));padding:20px;border-radius:12px;border:1px solid rgba(255,255,255,0.02)}
+.card h3{margin-top:0;color:var(--surface)}
+
+/* Team section */
+.team{padding:56px 0}
+.team-header{display:flex;flex-direction:column;gap:6px;margin-bottom:20px}
+.team-sub{color:var(--muted)}
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.role-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.03));padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);display:flex;flex-direction:column;gap:10px}
+.role-card h4{margin:0;color:var(--surface)}
+.role-card p{color:var(--muted);margin:0}
+
+/* Footer */
+.site-footer{padding:20px 0;border-top:1px solid rgba(255,255,255,0.02);margin-top:40px}
+.footer-inner{display:flex;justify-content:space-between;align-items:center;color:var(--muted)}
+
+/* Мелкие стили и адаптив */
+.link-muted{color:var(--muted);text-decoration:none;margin-left:6px}
+.accent-phrase, .intext-accent, .hero-accent{transition:transform .14s}
+.accent-phrase:hover{transform:translateY(-2px)}
+
+
+@media (max-width:1000px){
+  .hero-grid{grid-template-columns:1fr;gap:18px}
+  .hero-right{display: none;}
+  .cards{grid-template-columns:1fr}
+  .team-grid{grid-template-columns:1fr}
+  .top-nav{display:none}
+  .header-row{}
+}
+
+
+/* ---------- FEATURES REDESIGN ---------- */
+.section-header{text-align:center;margin-bottom:40px}
+.section-title{font-family:'WishlysDisplay';font-size:32px;color:var(--surface)}
+.section-sub{color:var(--muted);font-size:16px}
+.highlight{color:var(--accent)}
+.text-accent{color:var(--accent);font-weight:600}
+
+.feature-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:24px;
+}
+.feature-item{
+  background:linear-gradient(145deg,rgba(255,255,255,0.02),rgba(0,0,0,0.2));
+  border:1px solid rgba(255,255,255,0.05);
+  border-radius:16px;
+  padding:24px;
+  box-shadow:0 8px 30px rgba(0,0,0,0.4);
+  transition:transform .3s ease, box-shadow .3s ease;
+  cursor: pointer;
+}
+.feature-item:hover{
+  transform:translateY(-6px);
+  box-shadow:0 18px 40px rgba(151, 193, 236, 0.17);
+}
+.icon-circle{
+  width:50px;height:50px;border-radius:50%;
+  background:rgba(151,194,236,0.1);
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;margin-bottom:14px;color:var(--accent);
+}
+
+/* ---------- TEAM REDESIGN ---------- */
+.team-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:24px;
+}
+.role-card{
+  background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(0,0,0,0.2));
+  border-radius:14px;
+  padding:22px;
+  border:1px solid rgba(255,255,255,0.05);
+  box-shadow:0 6px 25px rgba(0,0,0,0.4);
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  transition:transform .3s ease, all .3s ease;
+  cursor: pointer;
+}
+.role-card:hover{
+  
+  transform:translateY(-8px);
+  box-shadow:0 18px 45px rgba(151, 193, 236, 0.183);
+  
+}
+.badge-role{
+  align-self:flex-start;
+  background:rgba(151,194,236,0.12);
+  color:var(--accent);
+  padding:4px 10px;
+  border-radius:10px;
+  font-size:12px;
+  font-weight:600;
+}
+.team-cta{
+  text-align:center;
+  margin-top:40px;
+  color:var(--muted);
+}
+
+/* ---------- REVIEWS SLIDER ---------- */
+.reviews{
+  padding:60px 0;
+  overflow:hidden;
+  position:relative;
+}
+.reviews-slider{
+  display:flex;
+  gap:20px;
+  width:max-content;
+  animation:scrollReviews 55s linear infinite;
+}
+.review-card{
+  background:linear-gradient(145deg,rgba(255,255,255,0.02),rgba(0,0,0,0.2));
+  border:1px solid rgba(255,255,255,0.05);
+  border-radius:16px;
+  padding:20px;
+  width:260px;
+  text-align:center;
+  box-shadow:0 6px 20px rgba(0,0,0,0.4);
+  transition:transform .2s ease, all .3s ease;
+
+  &:hover {
+    transform:translateY(-8px);
+    box-shadow:0 18px 45px rgba(151, 193, 236, 0.183);
+  }
+}
+
+.review-card img{
+  width:60px;height:60px;border-radius:50%;object-fit:cover;margin-bottom:10px;
+}
+.review-card h4{margin:6px 0;color:var(--surface)}
+.review-card p{color:var(--muted);font-size:14px;line-height:1.4}
+
+@keyframes scrollReviews{
+  0%{transform:translateX(0)}
+  100%{transform:translateX(-50%)}
+}
+
+/* Останавливаем при наведении */
+.reviews-slider:hover{
+  animation-play-state:paused;
+}
+
+@media (max-width:700px){
+  .review-card{width:220px;padding:16px}
+  .section-title{font-size:26px}
+  .feature-grid,.team-grid{gap:16px}
+}
+
+
+/* ---------- BIG FOOTER ---------- */
+.footer {
+  background: radial-gradient(circle at top left, rgba(151,194,236,0.05) 0%, --bg-dark 70%);
+  border-top: 1px solid rgba(255,255,255,0.05);
+  padding: 60px 0 20px;
+  color: var(--muted);
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.footer-logo {
+  display:flex;
+  align-items:center;
+  justify-content: center;
+  background-color: #1f1f1f;
+  border-radius: 15px;
+  border: 1px solid #7fb5e6;
+  width: 65px;
+  height: 65px;
+}
+.footer-logo img {
+  width:42px;height:42px;object-fit:contain;
+  filter:drop-shadow(0 0 10px rgba(151,194,236,0.5));
+}
+.footer-brand-name {
+  font-family:'WishlysDisplay','WishlysSans',sans-serif;
+  font-size:22px;color:var(--surface);
+  background:linear-gradient(90deg,var(--accent),#cde3ff);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  letter-spacing:0.5px;
+}
+.footer-desc {
+  font-size:14px;max-width:260px;line-height:1.5;
+}
+.social-links {
+  display:flex;gap:10px;margin-top:4px;
+}
+.social-links img {
+  width:22px;height:22px;opacity:0.7;transition:opacity .2s,transform .2s;
+}
+.social-links a:hover img {
+  opacity:1;transform:translateY(-2px);
+}
+
+.footer-col h4 {
+  color:var(--surface);
+  font-family:'WishlysDisplay';
+  font-size:16px;
+  margin-bottom:12px;
+}
+.footer-col ul {
+  list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;
+}
+.footer-col a {
+  color:var(--muted);
+  text-decoration:none;
+  font-size:14px;
+  transition:color .2s;
+}
+.footer-col a:hover { color:var(--accent); }
+
+.footer-bottom {
+  border-top:1px solid rgba(255,255,255,0.05);
+  padding-top:18px;
+  font-size:13px;
+}
+.bottom-inner {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:10px;
+}
+.bottom-links {
+  display:flex;gap:14px;
+}
+.bottom-links a {
+  color:var(--muted);
+  text-decoration:none;
+  transition:color .2s;
+}
+.bottom-links a:hover { color:var(--accent); }
+
+@media (max-width:900px){
+  .footer-grid{grid-template-columns:1fr 1fr;gap:30px;}
+}
+@media (max-width:600px){
+  .footer-grid{grid-template-columns:1fr;}
+  .footer-brand{align-items:center;text-align:center;}
+  .footer-desc{max-width:100%;}
+  .social-links{justify-content:center;}
+  .bottom-inner{flex-direction:column;gap:6px;}
+}
