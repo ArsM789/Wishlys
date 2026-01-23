@@ -1,5 +1,8 @@
 // Небольшая логика: год в футере + добавление задач в мокап
 document.getElementById('year').textContent = new Date().getFullYear();
+document.getElementById('btn-primary').addEventListener('click', function() {
+    window.open('https://t.me/wishlyssupport', '_blank');
+  });
 
 const addBtn = document.getElementById('addTaskBtn');
 const input = document.getElementById('newTaskInput');
